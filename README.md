@@ -29,6 +29,7 @@
 ### 商品購入機能
 クレジットカード情報はPAY.JPに送信
 - 購入代金の表示
+
 ##### 必須項目
 - 郵便番号
 - 都道府県 (Active hash)
@@ -40,17 +41,17 @@
 ## テーブル設計
 
 ### users
-|      Column             | Type    | Options     |
-| ----------------------- | ------- | ----------- |
-| PK | id                 | integer |             |
-|    | nickname           | string  | null: false |
-|    | email              | string  | null: false |
-|    | pass               | string  | null: false |
-|    | last_name          | string  | null: false |
-|    | first_name         | string  | null: false |
-|    | last_name_kana     | string  | null: false |
-|    | first_name_kana    | string  | null: false |
-|    | date_of_birth      | integer | null: false |
+| Column             | Type    | Options                        |
+| ------------------ | ------- | ------------------------------ |
+| id                 | integer |                                |
+| nickname           | string  | null: false                    |
+| email              | string  | null: false, unique: true      |
+| pass               | string  | null: false                    |
+| last_name          | string  | null: false                    |
+| first_name         | string  | null: false                    |
+| last_name_kana     | string  | null: false                    |
+| first_name_kana    | string  | null: false                    |
+| date_of_birth      | integer | null: false                    |
 
 #### Association
 - has_many :items
@@ -59,19 +60,19 @@
 
 
 ### items
-|      Column             | Type    | Options     |
-| ----------------------- | ------- | ----------- |
-| PK | id                 | integer |             |
-| FK | user_id            | integer |             |
-|    | image              | text    | null: false |
-|    | title              | string  | null: false |
-|    | description        | text    | null: false |
-|    | category_id        | integer |             |
-|    | condition_id       | integer |             |
-|    | postage_id         | integer |             |
-|    | sender_id          | integer |             |
-|    | shipping_days_id   | integer |             |
-|    | price              | integer | null: false |
+| Column             | Type    | Options                        |
+| ------------------ | ------- | ------------------------------ |
+| id                 | integer |                                |
+| user_id            | integer | foreign_key: true              |
+| image              | text    | null: false                    |
+| title              | string  | null: false                    |
+| description        | text    | null: false                    |
+| category_id        | integer | null: false                    |
+| condition_id       | integer | null: false                    |
+| postage_id         | integer | null: false                    |
+| sender_id          | integer | null: false                    |
+| shipping_days_id   | integer | null: false                    |
+| price              | integer | null: false                    |
 
 #### Association
 - belongs_to :users
@@ -80,12 +81,12 @@
 
 
 ### purchases
-|      Column             | Type    | Options     |
-| ----------------------- | ------- | ----------- |
-| PK | id                 | integer |             |
-| FK | buyer_id           | integer |             |
-| FK | seller_id          | integer |             |
-| FK | item_id            | integer |             |
+| Column             | Type    | Options                        |
+| ------------------ | ------- | ------------------------------ |
+| id                 | integer |                                |
+| buyer_id           | integer | foreign_key: true              |
+| seller_id          | integer | foreign_key: true              |
+| item_id            | integer | foreign_key: true              |
 
 #### Association
 - belongs_to :users
@@ -94,18 +95,18 @@
 
 
 ### addresses
-|      Column             | Type    | Options     |
-| ----------------------- | ------- | ----------- |
-|    | post_number        | integer | null: false |
-|    | prefectures_id     | integer |             |
-|    | municipalities     | string  | null: false |
-|    | address            | string  | null: false |
-|    | building           | string  | null: false |
-|    | phone              | integer | null: false |
-| FK | last_name          | string  | null: false |
-| FK | first_name         | string  | null: false |
-| FK | last_name_kana     | string  | null: false |
-| FK | first_name_kana    | string  | null: false |
+| Column             | Type    | Options                        |
+| ------------------ | ------- | ------------------------------ |
+| post_number        | integer | null: false                    |
+| prefectures_id     | integer | null: false                    |
+| municipalities     | string  | null: false                    |
+| address            | string  | null: false                    |
+| building           | string  | null: false                    |
+| phone              | integer | null: false                    |
+| last_name          | string  | null: false, foreign_key: true |
+| first_name         | string  | null: false, foreign_key: true |
+| last_name_kana     | string  | null: false, foreign_key: true |
+| first_name_kana    | string  | null: false, foreign_key: true |
 
 #### Association
 - belongs_to :users
@@ -113,12 +114,12 @@
 
 
 ### comments
-|      Column             | Type    | Options     |
-| ----------------------- | ------- | ----------- |
-| FK | nickname           | string  |             |
-| FK | user_id            | integer |             |
-| FK | item_id            | integer |             |
-|    | text               | text    |             |
+| Column             | Type    | Options                        |
+| ------------------ | ------- | ------------------------------ |
+| nickname           | string  | foreign_key: true              |
+| user_id            | integer | foreign_key: true              |
+| item_id            | integer | foreign_key: true              |
+| text               | text    | null: false                    |
 
 #### Association
 - belongs_to :users
