@@ -103,9 +103,6 @@
 - belongs_to :users
 - belongs_to :purchases
 
-#### Association
-- belongs_to :users
-- belongs_to :items
 
 ### prefectures(Active hash)
 - prefectures
