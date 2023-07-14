@@ -41,17 +41,16 @@
 ## テーブル設計
 
 ### users
-| Column             | Type    | Options                        |
-| ------------------ | ------- | ------------------------------ |
-| id                 | integer |                                |
-| nickname           | string  | null: false                    |
-| email              | string  | null: false, unique: true      |
-| pass               | string  | null: false                    |
-| last_name          | string  | null: false                    |
-| first_name         | string  | null: false                    |
-| last_name_kana     | string  | null: false                    |
-| first_name_kana    | string  | null: false                    |
-| date_of_birth      | integer | null: false                    |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| nickname           | string     | null: false                    |
+| email              | string     | null: false, unique: true      |
+| encrypted_password | string     | null: false                    |
+| last_name          | string     | null: false                    |
+| first_name         | string     | null: false                    |
+| last_name_kana     | string     | null: false                    |
+| first_name_kana    | string     | null: false                    |
+| date_of_birth      | date       | null: false                    |
 
 #### Association
 - has_many :items
@@ -60,66 +59,49 @@
 
 
 ### items
-| Column             | Type    | Options                        |
-| ------------------ | ------- | ------------------------------ |
-| id                 | integer |                                |
-| user_id            | integer | foreign_key: true              |
-| image              | text    | null: false                    |
-| title              | string  | null: false                    |
-| description        | text    | null: false                    |
-| category_id        | integer | null: false                    |
-| condition_id       | integer | null: false                    |
-| postage_id         | integer | null: false                    |
-| sender_id          | integer | null: false                    |
-| shipping_days_id   | integer | null: false                    |
-| price              | integer | null: false                    |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| user               | references | foreign_key: true              |
+| title              | string     | null: false                    |
+| description        | text       | null: false                    |
+| category_id        | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
+| postage_id         | integer    | null: false                    |
+| prefectures_id     | integer    | null: false                    |
+| shipping_days_id   | integer    | null: false                    |
+| price              | integer    | null: false                    |
 
 #### Association
-- belongs_to :users
-- belongs_to :purchases
+- belongs_to :user
+- has_many :purchases
 - has_many :comments
 
 
 ### purchases
-| Column             | Type    | Options                        |
-| ------------------ | ------- | ------------------------------ |
-| id                 | integer |                                |
-| buyer_id           | integer | foreign_key: true              |
-| seller_id          | integer | foreign_key: true              |
-| item_id            | integer | foreign_key: true              |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| user               | references | foreign_key: true              |
+| item               | references | foreign_key: true              |
 
 #### Association
-- belongs_to :users
-- belongs_to :items
-- belongs_to :addresses
+- belongs_to :user
+- belongs_to :item
+- has_many :address
 
 
 ### addresses
-| Column             | Type    | Options                        |
-| ------------------ | ------- | ------------------------------ |
-| post_number        | integer | null: false                    |
-| prefectures_id     | integer | null: false                    |
-| municipalities     | string  | null: false                    |
-| address            | string  | null: false                    |
-| building           | string  | null: false                    |
-| phone              | integer | null: false                    |
-| last_name          | string  | null: false, foreign_key: true |
-| first_name         | string  | null: false, foreign_key: true |
-| last_name_kana     | string  | null: false, foreign_key: true |
-| first_name_kana    | string  | null: false, foreign_key: true |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| post_number        | integer    | null: false                    |
+| prefectures_id     | integer    | null: false                    |
+| municipalities     | string     | null: false                    |
+| address            | string     | null: false                    |
+| building           | string     |                                |
+| phone              | string     | null: false                    |
 
 #### Association
 - belongs_to :users
 - belongs_to :purchases
-
-
-### comments
-| Column             | Type    | Options                        |
-| ------------------ | ------- | ------------------------------ |
-| nickname           | string  | foreign_key: true              |
-| user_id            | integer | foreign_key: true              |
-| item_id            | integer | foreign_key: true              |
-| text               | text    | null: false                    |
 
 #### Association
 - belongs_to :users
