@@ -60,7 +60,7 @@
 ### items
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| user               | references | foreign_key: true              |
+| user               | references | null: false, foreign_key: true |
 | title              | string     | null: false                    |
 | description        | text       | null: false                    |
 | category_id        | integer    | null: false                    |
@@ -90,7 +90,7 @@
 ### addresses
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| orders             | references | foreign_key: true              |
+| order              | references | foreign_key: true              |
 | post_number        | string     | null: false                    |
 | prefecture_id      | integer    | null: false                    |
 | municipalities     | string     | null: false                    |
