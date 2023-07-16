@@ -55,7 +55,6 @@
 #### Association
 - has_many :items
 - has_many :orders
-- has_many :addresses
 
 
 ### items
@@ -67,13 +66,13 @@
 | category_id        | integer    | null: false                    |
 | condition_id       | integer    | null: false                    |
 | postage_id         | integer    | null: false                    |
-| prefectures_id     | integer    | null: false                    |
-| shipping_days_id   | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| shipping_day_id    | integer    | null: false                    |
 | price              | integer    | null: false                    |
 
 #### Association
 - belongs_to :user
-- has_many :purchases
+- belongs_to :purchases
 - has_many :comments
 
 
@@ -82,30 +81,35 @@
 | ------------------ | ---------- | ------------------------------ |
 | user               | references | foreign_key: true              |
 | item               | references | foreign_key: true              |
+| post_number        | string     | foreign_key: true              |
+| prefecture_id      | integer    | foreign_key: true              |
+| municipalities     | string     | foreign_key: true              |
+| address            | string     | foreign_key: true              |
+| building           | string     | foreign_key: true              |
+| phone              | string     | foreign_key: true              |
 
 #### Association
 - belongs_to :user
 - belongs_to :item
-- has_many :address
+- belongs_to :address
 
 
 ### addresses
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
-| post_number        | integer    | null: false                    |
-| prefectures_id     | integer    | null: false                    |
+| post_number        | string     | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | municipalities     | string     | null: false                    |
 | address            | string     | null: false                    |
 | building           | string     |                                |
 | phone              | string     | null: false                    |
 
 #### Association
-- belongs_to :users
 - belongs_to :purchases
 
 
-### prefectures(Active hash)
-- prefectures
+### prefecture(Active hash)
+- prefecture
 
 ### category(Active hash)
 - category
