@@ -54,7 +54,7 @@
 
 #### Association
 - has_many :items
-- has_many :orders
+- has_many :purchases
 
 
 ### items
@@ -72,8 +72,7 @@
 
 #### Association
 - belongs_to :user
-- belongs_to :purchases
-- has_many :comments
+- has_one :purchase
 
 
 ### purchases
@@ -81,22 +80,17 @@
 | ------------------ | ---------- | ------------------------------ |
 | user               | references | foreign_key: true              |
 | item               | references | foreign_key: true              |
-| post_number        | string     | foreign_key: true              |
-| prefecture_id      | integer    | foreign_key: true              |
-| municipalities     | string     | foreign_key: true              |
-| address            | string     | foreign_key: true              |
-| building           | string     | foreign_key: true              |
-| phone              | string     | foreign_key: true              |
 
 #### Association
 - belongs_to :user
 - belongs_to :item
-- belongs_to :address
+- has_one :address
 
 
 ### addresses
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
+| orders             | references | foreign_key: true              |
 | post_number        | string     | null: false                    |
 | prefecture_id      | integer    | null: false                    |
 | municipalities     | string     | null: false                    |
@@ -105,7 +99,7 @@
 | phone              | string     | null: false                    |
 
 #### Association
-- belongs_to :purchases
+- belongs_to :purchase
 
 
 ### prefecture(Active hash)
@@ -119,9 +113,6 @@
 
 ### postage(Active hash)
 - postage
-
-### sender(Active hash)
-- sender
 
 ### shipping_day(Active hash)
 - shipping_day
