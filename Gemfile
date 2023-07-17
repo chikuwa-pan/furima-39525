@@ -79,3 +79,4 @@ group :production do
 end
 
 gem 'payjp'
+gem 'devise'
