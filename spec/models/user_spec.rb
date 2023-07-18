@@ -78,16 +78,28 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password は英字と数字の両方を含めて設定してください")
       end
 
-      it '苗字が空では登録できない' do
+      it '姓が空では登録できない' do
         @user.last_name = ''
         @user.valid?
         expect(@user.errors.full_messages).to include "Last name can't be blank"
       end
 
-      it '名前が空では登録できない' do
+      it '名が空では登録できない' do
         @user.first_name = ''
         @user.valid?
         expect(@user.errors.full_messages).to include "First name can't be blank"
+      end
+
+      it '姓が半角では登録できない' do
+        @user.last_name = 'ﾐｮｳｼﾞ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Last name は全角文字を使用してください"
+      end
+
+      it '名が半角では登録できない' do
+        @user.first_name = 'ﾅﾏｴ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "First name は全角文字を使用してください"
       end
 
       it '苗字カナが空では登録できない' do
