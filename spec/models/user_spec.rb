@@ -60,6 +60,24 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
 
+      it '英字のみのパスワードでは登録できない' do
+        @user.password = 'pass'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password は英字と数字の両方を含めて設定してください")
+      end
+
+      it '数字のみのパスワードでは登録できない' do
+        @user.password = '1234'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password は英字と数字の両方を含めて設定してください")
+      end
+
+      it '全角文字を含むパスワードでは登録できない' do
+        @user.password = '１２３４'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password は英字と数字の両方を含めて設定してください")
+      end
+
       it '苗字が空では登録できない' do
         @user.last_name = ''
         @user.valid?
@@ -84,16 +102,28 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include "First name kana can't be blank"
       end
 
-      it '苗字カナが半角では登録できない' do
+      it '姓（カナ）が半角では登録できない' do
         @user.last_name_kana = 'ﾃｽﾄ'
         @user.valid?
-        expect(@user.errors.full_messages).to include "Last name kana 全角文字を使用してください"
+        expect(@user.errors.full_messages).to include "Last name kana は全角カタカナで入力してください"
       end
 
-      it '名前カナが半角では登録できない' do
+      it '名（カナ）が半角では登録できない' do
         @user.first_name_kana = 'ﾃｽﾄ'
         @user.valid?
-        expect(@user.errors.full_messages).to include "First name kana 全角文字を使用してください"
+        expect(@user.errors.full_messages).to include "First name kana は全角カタカナで入力してください"
+      end
+
+      it '姓（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
+        @user.last_name_kana = 'ﾃｽﾄ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "Last name kana は全角カタカナで入力してください"
+      end
+
+      it '名（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
+        @user.first_name_kana = 'ﾃｽﾄ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include "First name kana は全角カタカナで入力してください"
       end
 
       it '生年月日が空では登録できない' do
