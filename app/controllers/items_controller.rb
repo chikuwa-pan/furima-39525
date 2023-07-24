@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+before_action :move_to_sign_in, only: [:new]
+
   def index
     @items = Item.all
   end
@@ -28,5 +30,10 @@ class ItemsController < ApplicationController
                                   :prefecture_id,
                                   :shipping_day_id,
                                   :price)
+  end
+  def move_to_sign_in
+    unless user_signed_in?
+        redirect_to new_user_session_path
+    end
   end
 end
