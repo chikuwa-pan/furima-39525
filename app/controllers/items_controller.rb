@@ -29,7 +29,7 @@ before_action :move_to_sign_in, only: [:new]
                                   :postage_id,
                                   :prefecture_id,
                                   :shipping_day_id,
-                                  :price)
+                                  :price).merge(user_id: current_user.id)
   end
   def move_to_sign_in
     unless user_signed_in?
