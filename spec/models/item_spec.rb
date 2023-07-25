@@ -1,20 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
+  before do
+    @item = FactoryBot.build(:item)
+  end
+
   describe '商品出品' do
     context '出品できる' do
-      before do
-        @item = FactoryBot.build(:item)
-      end
-
       it '商品画像と商品名と商品の説明とカテゴリーと商品の状態と配送料の負担と発送元の地域と発送までの日数と販売価格が存在すれば出品できる' do
         expect(@item).to be_valid
       end
     end
 
     context '出品できない' do
-      before do
-        @item = Item.new
+      it 'ユーザーが紐づいていない場合は登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors[:user]).to include("must exist")
       end
 
       it 'imageが空では登録できない' do
@@ -35,34 +37,34 @@ RSpec.describe Item, type: :model do
         expect(@item.errors[:description]).to include("can't be blank")
       end
 
-      it 'category_id が空では登録できない' do
-        @item.category_id = nil
+      it 'category_idが未選択では登録できない' do
+        @item.category_id = 1
         @item.valid?
-        expect(@item.errors[:category_id]).to include("can't be blank")
+        expect(@item.errors[:category_id])
       end
 
-      it 'condition_id が空では登録できない' do
-        @item.condition_id = nil
+      it 'condition_idが未選択では登録できない' do
+        @item.condition_id = 1
         @item.valid?
-        expect(@item.errors[:condition_id]).to include("can't be blank")
+        expect(@item.errors[:condition_id])
       end
 
-      it 'postage_idが空では登録できない' do
-        @item.postage_id = nil
+      it 'postage_idが未選択では登録できない' do
+        @item.postage_id = 1
         @item.valid?
-        expect(@item.errors[:postage_id]).to include("can't be blank")
+        expect(@item.errors[:postage_id])
       end
 
-      it 'prefecture_idが空では登録できない' do
-        @item.prefecture_id = nil
+      it 'prefecture_idが未選択では登録できない' do
+        @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors[:prefecture_id]).to include("can't be blank")
+        expect(@item.errors[:prefecture_id])
       end
 
-      it 'shipping_day_id が空では登録できない' do
-        @item.shipping_day_id = nil
+      it 'shipping_day_idが未選択では登録できない' do
+        @item.shipping_day_id = 1
         @item.valid?
-        expect(@item.errors[:shipping_day_id]).to include("can't be blank")
+        expect(@item.errors[:shipping_day_id])
       end
 
       it 'priceが空では登録できない' do

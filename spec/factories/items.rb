@@ -2,11 +2,11 @@ FactoryBot.define do
   factory :item do
       title           {"商品名"}
       description     {"商品説明"}
-      category_id     {1}
-      condition_id    {1}
-      postage_id      {1}
-      prefecture_id   {1}
-      shipping_day_id {1}
+      category_id     {2}
+      condition_id    {2}
+      postage_id      {2}
+      prefecture_id   {2}
+      shipping_day_id {2}
       price           {1000}
       
       user { FactoryBot.create(:user) }
