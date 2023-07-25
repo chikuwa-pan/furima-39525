@@ -40,31 +40,31 @@ RSpec.describe Item, type: :model do
       it 'category_idが未選択では登録できない' do
         @item.category_id = 1
         @item.valid?
-        expect(@item.errors[:category_id])
+        expect(@item.errors[:category_id]).to be_empty
       end
 
       it 'condition_idが未選択では登録できない' do
         @item.condition_id = 1
         @item.valid?
-        expect(@item.errors[:condition_id])
+        expect(@item.errors[:condition_id]).to be_empty
       end
 
       it 'postage_idが未選択では登録できない' do
         @item.postage_id = 1
         @item.valid?
-        expect(@item.errors[:postage_id])
+        expect(@item.errors[:postage_id]).to be_empty
       end
 
       it 'prefecture_idが未選択では登録できない' do
         @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors[:prefecture_id])
+        expect(@item.errors[:prefecture_id]).to be_empty
       end
 
       it 'shipping_day_idが未選択では登録できない' do
         @item.shipping_day_id = 1
         @item.valid?
-        expect(@item.errors[:shipping_day_id])
+        expect(@item.errors[:shipping_day_id]).to be_empty
       end
 
       it 'priceが空では登録できない' do

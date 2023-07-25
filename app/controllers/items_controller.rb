@@ -19,7 +19,7 @@ before_action :move_to_sign_in, only: [:new]
     end
   end
 
-
+  private
   def item_params
     params.require(:item).permit( :image,
                                   :title, 

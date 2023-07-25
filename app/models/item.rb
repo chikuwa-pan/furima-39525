@@ -1,8 +1,7 @@
 class Item < ApplicationRecord
   validates :image, presence: true
 
-  validates :user, 
-            :title, 
+  validates :title, 
             :description, 
             :category_id, 
             :condition_id, 
