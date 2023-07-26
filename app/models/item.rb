@@ -20,11 +20,18 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-    belongs_to_active_hash :category, numericality: { other_than: 1 }
-    belongs_to_active_hash :condition, numericality: { other_than: 1 }
-    belongs_to_active_hash :postage, numericality: { other_than: 1 }
-    belongs_to_active_hash :prefecture, numericality: { other_than: 1 }
-    belongs_to_active_hash :shipping_day, numericality: { other_than: 1 }
+    belongs_to_active_hash :category
+    belongs_to_active_hash :condition
+    belongs_to_active_hash :postage
+    belongs_to_active_hash :prefecture
+    belongs_to_active_hash :shipping_day
+
+    validates :category_id, 
+              :condition_id, 
+              :postage_id, 
+              :prefecture_id, 
+              :shipping_day_id, 
+              exclusion: { in: [1] }
 
   def was_attached?
     self.image.attached?
