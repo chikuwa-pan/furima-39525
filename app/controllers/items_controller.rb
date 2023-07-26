@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_sign_in, only: [:new, :edit]
   before_action :move_to_index, except: [:index, :show, :update]
 
@@ -33,6 +33,13 @@ class ItemsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    #item = Item.find(params[:id])
+    #item.destroy
+    @item.destroy
+    redirect_to root_path
   end
 
   private
