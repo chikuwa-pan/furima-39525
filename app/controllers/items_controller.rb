@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:show, :edit, :update]
   before_action :move_to_sign_in, only: [:new, :edit]
   before_action :move_to_index, except: [:index, :show]
-  before_action :set_item, only: [:show, :edit, :update]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
@@ -52,6 +52,14 @@ class ItemsController < ApplicationController
                                   :price).merge(user_id: current_user.id)
   end
 
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def current_user_item
+    @item.user == current_user
+  end
+
   def move_to_sign_in
     unless user_signed_in?
         redirect_to new_user_session_path
@@ -64,12 +72,4 @@ class ItemsController < ApplicationController
     end
   end
 
-  def set_item
-    @item = Item.find(params[:id])
-  end
-
-  def current_user_item
-    item = Item.find(params[:id])
-    item.user == current_user
-  end
 end
