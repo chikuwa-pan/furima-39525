@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
-before_action :move_to_sign_in, only: [:new]
+  before_action :set_item, only: [:show, :edit, :update]
+  before_action :move_to_sign_in, only: [:new, :edit]
+  before_action :move_to_index, except: [:index, :show, :update]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
@@ -20,7 +22,17 @@ before_action :move_to_sign_in, only: [:new]
   end
 
   def show
-    @item = Item.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if @item.update(item_params)
+      redirect_to item_path(@item.id)
+    else
+      render :edit
+    end
   end
 
   private
@@ -35,9 +47,25 @@ before_action :move_to_sign_in, only: [:new]
                                   :shipping_day_id,
                                   :price).merge(user_id: current_user.id)
   end
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def current_user_item
+    @item.user == current_user
+  end
+
   def move_to_sign_in
     unless user_signed_in?
         redirect_to new_user_session_path
     end
   end
+
+  def move_to_index
+    unless user_signed_in? && current_user_item
+        redirect_to root_path
+    end
+  end
+
 end
