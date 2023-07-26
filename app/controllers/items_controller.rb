@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
       if @item.user == current_user
         if @item.update(item_params)
-          redirect_to @item
+          redirect_to item_path(@item.id)
         else
           render :edit
         end
