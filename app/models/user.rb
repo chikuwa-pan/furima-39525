@@ -18,6 +18,7 @@ class User < ApplicationRecord
         validates :date_of_birth, presence: true
 
         has_many :items
+        has_many :purchases
 
   def validate_email_format
     unless email =~ /\A[^@\s]+@[^@\s]+\z/
