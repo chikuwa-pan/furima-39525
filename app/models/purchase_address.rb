@@ -5,11 +5,11 @@ class PurchaseAddress
   with_options presence: true do
     validates :item_id
     validates :user_id
-    validates :post_number, format: { with: /\A\d{3}[-]\d{4}\z/, message: "3桁の数字-4桁の数字の形式で入力してください" }
+    validates :post_number, format: { with: /\A\d{3}[-]\d{4}\z/, message: "must be in the format of XXX-XXXX(three digits, hyphen, and four digits)." }
     validates :prefecture_id, exclusion: { in: [1] }
     validates :municipalities
     validates :address
-    validates :phone, format: { with: /\A\d{10,11}\z/, message: "ハイフンなし10桁もしくは11桁の形式で入力してください" }
+    validates :phone, format: { with: /\A\d{10,11}\z/, message: "must be 10 or 11 digits without hyphens." }
   end
 
     def save
