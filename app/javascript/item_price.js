@@ -1,5 +1,5 @@
 const priceInput = document.getElementById("item-price");
-priceInput.addEventListener("input", () => {
+priceInput.addEventListener("keyup", () => {
   const price = parseInt(priceInput.value); // 入力された金額を整数に変換
 
   // 価格が有効な数値であれば計算結果を表示する
