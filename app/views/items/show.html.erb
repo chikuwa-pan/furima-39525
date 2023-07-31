@@ -27,7 +27,7 @@
         <p class="or-text">or</p>
         <%= link_to '削除', item_path(@item.id), data: { turbo_method: :delete }, class: "item-destroy" %>
       <% elsif user_signed_in? %>
-        <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
+        <%= link_to "購入画面に進む", item_purchases_path(@item.id) ,class:"item-red-btn"%>
       <% else %>
     <% end %>
 
