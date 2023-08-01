@@ -7,7 +7,7 @@
     <h1 class='transaction-title-text'>
       購入内容の確認
     </h1>
-    <%# 購入内容の表示 %>
+
     <div class='buy-item-info'>
       <%= image_tag @item.image, class: 'buy-item-img' %>
       <div class='buy-item-right-content'>
@@ -20,9 +20,7 @@
         </div>
       </div>
     </div>
-    <%# /購入内容の表示 %>
 
-    <%# 支払額の表示 %>
     <div class='item-payment'>
       <h1 class='item-payment-title'>
         支払金額
@@ -31,11 +29,10 @@
         ¥<%= @item.price %>
       </p>
     </div>
-    <%# /支払額の表示 %>
 
     <%= form_with model: @purchase_address, url: item_purchases_path(@item), id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
     <%= render 'shared/error_messages', model: f.object %>
-    <%# カード情報の入力 %>
+
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
         クレジットカード情報入力
@@ -70,9 +67,7 @@
         <div id="cvc-form" class="input-default"></div>
       </div>
     </div>
-    <%# /カード情報の入力 %>
     
-    <%# 配送先の入力 %>
     <div class='shipping-address-form'>
       <h1 class='info-input-haedline'>
         配送先入力
@@ -120,7 +115,7 @@
         <%= f.text_field :phone, class:"input-default", id:"phone-number", placeholder:"例）09012345678",maxlength:"11"%>
       </div>
     </div>
-    <%# /配送先の入力 %>
+
     <div class='buy-btn'>
       <%= f.submit "購入" ,class:"buy-red-btn", id:"button" %>
     </div>
