@@ -1,5 +1,6 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_seller_access, only: [:index]
   before_action :set_purchase, only: [:index, :create]
 
   def index
@@ -7,7 +8,7 @@ class PurchasesController < ApplicationController
     @purchase_address = PurchaseAddress.new(item_id: @item.id)
 
     if Purchase.exists?(item_id: @item.id)
-      redirect_to root_path
+      redirect_root
     end
   end
 
@@ -17,7 +18,7 @@ class PurchasesController < ApplicationController
       if @purchase_address.valid?
         payjp_charge
         @purchase_address.save
-        redirect_to root_path
+        redirect_root
       else
         render :index
       end
@@ -26,6 +27,17 @@ class PurchasesController < ApplicationController
   private
     def set_purchase
       @item = Item.find(params[:item_id])
+    end
+
+    def redirect_root
+      redirect_to root_path
+    end
+
+    def check_seller_access
+      set_purchase
+      if current_user == @item.user
+        redirect_root
+      end
     end
 
     def payjp_charge
