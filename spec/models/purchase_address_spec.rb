@@ -3,7 +3,9 @@ require 'gimei'
 
 RSpec.describe PurchaseAddress, type: :model do
   before do
-    @purchase_address = FactoryBot.build(:purchase_address)
+    @user_id = FactoryBot.create(:user)
+    @item_id = FactoryBot.create(:item)
+    @purchase_address = FactoryBot.build(:purchase_address, user_id: @user_id, item_id: @item_id)
   end
 
   describe '送付先住所の保存' do

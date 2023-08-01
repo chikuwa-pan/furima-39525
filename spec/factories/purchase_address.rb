@@ -7,7 +7,5 @@ FactoryBot.define do
     address         { japanese_address.town.kanji }
     phone           { '09011112222' }
     token           { 'sk_test_00000000000000000000000' }
-    item_id         { 1 }
-    user_id         { 1 }
   end
 end
