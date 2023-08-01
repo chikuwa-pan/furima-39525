@@ -17,6 +17,7 @@ class Item < ApplicationRecord
                       less_than_or_equal_to: 999999 }
 
   belongs_to :user
+  has_one :purchase
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
