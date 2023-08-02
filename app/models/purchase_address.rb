@@ -10,8 +10,7 @@ class PurchaseAddress
     validates :municipalities
     validates :address
     validates :phone, format: { with: /\A\d{10,11}\z/, message: "must be 10 or 11 digits without hyphens." }
-    #validates :token, presence: true, format: { with: /\A[a-z0-9]+\z/i }
-    validates :token, format: { with: /\Atok_[a-zA-Z0-9]{28}\z/ }
+    validates :token, format: { with: /\Atok_[a-zA-Z0-9]+\z/ }
   end
 
     def save
