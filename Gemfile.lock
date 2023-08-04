@@ -154,6 +154,7 @@ GEM
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
     json (2.6.3)
+    kgio (2.11.4)
     language_server-protocol (3.17.0.3)
     loofah (2.21.3)
       crass (~> 1.0.2)
@@ -197,7 +198,6 @@ GEM
       racc
     payjp (0.0.10)
       rest-client (~> 2.0)
-    pg (1.5.3)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -239,6 +239,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
+    raindrops (0.20.1)
     rake (13.0.6)
     regexp_parser (2.8.1)
     reline (0.3.6)
@@ -315,6 +316,9 @@ GEM
       unf_ext
     unf_ext (0.0.8.2)
     unicode-display_width (2.4.2)
+    unicorn (6.1.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -355,7 +359,6 @@ DEPENDENCIES
   mini_magick
   mysql2 (~> 0.5)
   payjp
-  pg
   pry-rails
   puma (~> 5.0)
   rails (~> 7.0.0)
@@ -366,6 +369,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  unicorn (= 6.1.0)
   web-console
   webdrivers
 
