@@ -1,10 +1,10 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_seller_access, only: [:index]
+  before_action :set_key, only: [:index, :create]
   before_action :set_purchase, only: [:index, :create]
 
   def index
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @purchase_address = PurchaseAddress.new(item_id: @item.id)
 
     if Purchase.exists?(item_id: @item.id)
@@ -25,6 +25,10 @@ class PurchasesController < ApplicationController
   end
 
   private
+    def set_key
+      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+    end
+
     def set_purchase
       @item = Item.find(params[:item_id])
     end
