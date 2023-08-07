@@ -5,4 +5,5 @@ Rails.application.routes.draw do
     resources :purchases, only: [:index, :create]
   end
   get '/purchases', to: 'purchases#index'
+  get '/category/:id', to: 'items#search'
 end

@@ -39,18 +39,23 @@
 
     <div class="items-detail">
       <div class="weight-bold-text">商品の詳細</div>
-      <div class="form">
-        <div class="weight-bold-text">
-          カテゴリー
-          <span class="indispensable">必須</span>
-        </div>
-        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
-        <div class="weight-bold-text">
-          商品の状態
-          <span class="indispensable">必須</span>
-        </div>
-        <%= f.collection_select(:condition_id, Condition.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %>
-      </div>
+        <div class="form">
+          <div class="weight-bold-text">
+            カテゴリー
+            <span class="indispensable">必須</span>
+          </div>
+            <%= form_with model: @categories, url: '/items/new' do |f|%>
+              <div id="select-wrap">
+                <%= f.collection_select :ancestry, @maincategories, :id, :name, {include_blank: "---"}, {class:"select-box", id: "parent-category" } %>
+              </div>
+            <% end %>
+          <%#= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
+            <div class="weight-bold-text">
+              商品の状態
+              <span class="indispensable">必須</span>
+            </div>
+          <%= f.collection_select(:condition_id, Condition.all, :id, :name, {}, {class:"select-box", id:"item-sales-status"}) %>
+        </div><!--/form-->
     </div>
 
     <div class="items-detail">

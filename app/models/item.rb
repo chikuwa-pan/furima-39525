@@ -17,11 +17,12 @@ class Item < ApplicationRecord
                       less_than_or_equal_to: 999999 }
 
   belongs_to :user
+  belongs_to :category
   has_one :purchase
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-    belongs_to_active_hash :category
+  #  belongs_to_active_hash :category
     belongs_to_active_hash :condition
     belongs_to_active_hash :postage
     belongs_to_active_hash :prefecture
